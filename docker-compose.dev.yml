@@ -1,0 +1,24 @@
+services:
+  api:
+    image: openjdk:11-slim
+    working_dir: /app
+    entrypoint: ./mvnw spring-boot:run
+    ports:
+      - 8080:8080
+    volumes:
+      - ./projAPI:/app
+
+  frontend:
+    image: node:alpine3.14
+    working_dir: /app
+    entrypoint: npm start
+    ports:
+      - 4200:4200
+    volumes:
+      - ./projFrontend:/app
+
+  sonarqube:
+    image: sonarqube:latest
+    ports:
+      - 9000:9000
+  
