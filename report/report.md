@@ -12,7 +12,7 @@ This application will be able to gather information from different sources, tran
 
 The frontend will be developed using the Angular framework. Its development will follow a behavior driven approach, making use of the Cucumber framework and Selenium.
 
-The API will be developed in Spring Boot following a test-driven approach. The tests will be written using the built-in utilities, Junit5 and Mockito. The cache will be stored in a Redis database, logs will be provided by Logback, and requests to external sources will be handled with the help of Retrofit. The development process will be accompanied by SonarQube to ensure the quality of the code.
+The API will be developed in Spring Boot following a test-driven approach. The tests will be written using the built-in utilities, Junit5 and Mockito. The cache will be stored in a Redis database, logs will be provided by Logback, and requests to external sources will be handled with the help of OkHttp. The development process will be accompanied by SonarQube to ensure the quality of the code.
   
 <br>
 
