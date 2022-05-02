@@ -13,4 +13,4 @@ Feature: Checking cases
   Scenario: Get invalid date range
     When I navigate to "http://localhost:4200/"
     And I select date range starting in "02-05-2022" and ending in "01-05-2022"
-    Then Result value should be "" and result country should be "World"
+    Then Result value should be "" and result country should be ""

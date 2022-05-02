@@ -1,5 +1,7 @@
 package io.github.bonigarcia;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -53,10 +55,18 @@ public class IndexPage {
   }
 
   public String getResultCountry () {
+    try {
+      TimeUnit.SECONDS.sleep(3);
+    } catch (InterruptedException e) {}
+    
     return resultCountry.getText();
   }
 
   public String getResultValue () {
+    try {
+      TimeUnit.SECONDS.sleep(3);
+    } catch (InterruptedException e) {}
+    
     return resultValue.getText();
   }
 

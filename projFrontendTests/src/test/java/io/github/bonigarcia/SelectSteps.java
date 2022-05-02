@@ -13,12 +13,14 @@ public class SelectSteps {
 
   private WebDriver driver;
 
-  private IndexPage indexPage = PageFactory.initElements(driver, IndexPage.class);
+  private IndexPage indexPage;
 
   @When("I navigate to {string}")
   public void iNavigateTo(String url) {
     driver = WebDriverManager.firefoxdriver().create();
     driver.get(url);
+
+    indexPage = PageFactory.initElements(driver, IndexPage.class);
   }
 
   @And("I select no filters")
@@ -39,14 +41,14 @@ public class SelectSteps {
     indexPage.submit();
   }
 
-  @And("Result value should be {string} and result country should be {string}")
+  @Then("Result value should be {string} and result country should be {string}")
   public void getValueANdCountryResult(String value, String country) {
     String resultCountry = indexPage.getResultCountry();
     String resultValue = indexPage.getResultValue();
     driver.quit();
     
-    if (!resultCountry.equals(country)) throw new AssertionError(String.format("Expected country '%s', received '%s'", resultCountry, country));
-    if (!resultValue.equals(value)) throw new AssertionError(String.format("Expected value '%s', received '%s'", resultValue, value));
+    if (!resultCountry.equals(country)) throw new AssertionError(String.format("Expected country '%s', received '%s'", country, resultCountry));
+    if (!resultValue.equals(value)) throw new AssertionError(String.format("Expected value '%s', received '%s'", value, resultValue));
   }
 
   @Then("Result country should be {string}")
@@ -54,6 +56,6 @@ public class SelectSteps {
     String resultCountry = indexPage.getResultCountry();
     driver.quit();
     
-    if (!resultCountry.equals(country)) throw new AssertionError(String.format("Expected country '%s', received '%s'", resultCountry, country));
+    if (!resultCountry.equals(country)) throw new AssertionError(String.format("Expected country '%s', received '%s'", country, resultCountry));
   }
 }
