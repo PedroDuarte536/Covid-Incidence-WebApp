@@ -33,9 +33,9 @@ public class CovidService_UnitTest {
   @BeforeEach
   public void setUp() {
 
-    Mockito.when(provider.getCovidCases()).thenReturn(new Metric("All", new AllTimePeriod(), 10));
-    Mockito.when(provider.getCovidCases(any(Date.class))).thenReturn(new Metric("All", new DatePeriod(new Date()), 10));
-    Mockito.when(provider.getCovidCases(any(Date.class), any(Date.class))).thenReturn(new Metric("All", new DateRangePeriod(new Date(), new Date()), 10));
+    Mockito.when(provider.getCovidCases()).thenReturn(new Metric("World", new AllTimePeriod(), 10));
+    Mockito.when(provider.getCovidCases(any(Date.class))).thenReturn(new Metric("World", new DatePeriod(new Date()), 10));
+    Mockito.when(provider.getCovidCases(any(Date.class), any(Date.class))).thenReturn(new Metric("World", new DateRangePeriod(new Date(), new Date()), 10));
 
     service.setProviders(new DataProvider[]{ provider });    
 
@@ -55,22 +55,26 @@ public class CovidService_UnitTest {
   @Test
   void whenGetCasesByDate_thenPeriodExtendsDate() {
 
-    Metric result = service.getCovidCases(new Date());
+    Date date = new Date();
+
+    Metric result = service.getCovidCases(date);
 
     assertEquals(DatePeriod.class, result.getPeriod().getClass());
 
-    Mockito.verify(provider, VerificationModeFactory.times(1)).getCovidCases();
+    Mockito.verify(provider, VerificationModeFactory.times(1)).getCovidCases(date);
 
   }
 
   @Test
   void whenGetCasesByDateRange_thenPeriodExtendsDateRange() {
 
-    Metric result = service.getCovidCases(new Date(), new Date());
+    Date date = new Date();
+
+    Metric result = service.getCovidCases(date, date);
 
     assertEquals(DateRangePeriod.class, result.getPeriod().getClass());
 
-    Mockito.verify(provider, VerificationModeFactory.times(1)).getCovidCases();
+    Mockito.verify(provider, VerificationModeFactory.times(1)).getCovidCases(date, date);
 
   }
 
@@ -79,7 +83,7 @@ public class CovidService_UnitTest {
 
     Metric result = service.getCovidCases();
 
-    assertEquals("All", result.getCountry());
+    assertEquals("World", result.getCountry());
 
     Mockito.verify(provider, VerificationModeFactory.times(1)).getCovidCases();
 

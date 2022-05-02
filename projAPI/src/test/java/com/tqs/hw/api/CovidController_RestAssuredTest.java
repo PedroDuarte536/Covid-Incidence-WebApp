@@ -21,7 +21,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.web.servlet.MockMvc;
 
+import io.restassured.http.ContentType;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
+
+import static org.hamcrest.Matchers.*;
 
 @WebMvcTest(CovidController.class)
 public class CovidController_RestAssuredTest {
@@ -53,7 +56,7 @@ public class CovidController_RestAssuredTest {
     String dateStr = "01-01-2019";
     Date date = dateFormat.parse(dateStr);
 
-    Mockito.when(service.getCovidCases(date)).thenReturn(new Metric("All", new DatePeriod(date), null));
+    Mockito.when(service.getCovidCases(date)).thenReturn(new Metric("World", new DatePeriod(date), null));
 
     RestAssuredMockMvc.given().param("date", dateStr).when().get("/covid/cases").then().status(HttpStatus.NOT_FOUND);
 
@@ -66,10 +69,13 @@ public class CovidController_RestAssuredTest {
     String dateEndStr = "01-02-2022";
 
     Map<String, String> params = new HashMap<>();
-    params.put("date_start", dateEndStr);
-    params.put("date_end", dateStartStr);
+    params.put("start_date", dateEndStr);
+    params.put("end_date", dateStartStr);
 
-    RestAssuredMockMvc.given().params(params).when().get("/covid/cases").then().status(HttpStatus.BAD_REQUEST).body("period", null);
+    RestAssuredMockMvc
+      .given().contentType(ContentType.JSON).queryParams(params)
+      .when().get("/covid/cases")
+      .then().contentType(ContentType.JSON).status(HttpStatus.BAD_REQUEST).body("period", equalTo(null));
 
     Mockito.verify(service, Mockito.never()).getCovidCases(Mockito.any(Date.class));
   }

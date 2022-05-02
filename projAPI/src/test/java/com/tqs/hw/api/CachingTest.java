@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 public class CachingTest {
 
   private CachedHttpClient httpClient = new CachedHttpClient();
-  private String testUrl = "";
+  private String testUrl = "https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/total";
 
   @Test
   public void whenRequestIsMadeForTheFirstTime_thenCacheDoesNotExist () {
