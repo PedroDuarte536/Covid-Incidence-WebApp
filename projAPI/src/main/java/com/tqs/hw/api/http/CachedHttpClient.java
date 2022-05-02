@@ -14,7 +14,7 @@ public class CachedHttpClient implements HttpClient {
 
   private final Logger logger = LoggerFactory.getLogger(CachedHttpClient.class);
 
-  private static int cacheTTLSeconds = 30;
+  public static final int CACHE_TTL_SECONDS = 30;
 
   private OkHttpClient httpClient = new OkHttpClient();
   private Jedis jedis = new Jedis();
@@ -27,7 +27,7 @@ public class CachedHttpClient implements HttpClient {
       try {
         response = httpClient.newCall(new Request.Builder().url(url).header("X-RapidAPI-Key", "5790be0effmshcf45bef2d3f069fp12d204jsnb31f8d77bc90").build()).execute().body().string();
 
-        jedis.set(url, response, (new SetParams()).ex(cacheTTLSeconds));
+        jedis.set(url, response, (new SetParams()).ex(CACHE_TTL_SECONDS));
         logger.info("Response from '{}' was stored in cache", url);
       } catch (IOException e) {
         logger.error("Could not get a valid response from '{}'", url);
