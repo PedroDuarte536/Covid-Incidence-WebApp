@@ -1,0 +1,16 @@
+-------------------------------------------------------------------------------
+Test set: CucumberTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 0, Errors: 4, Skipped: 0, Time elapsed: 8.285 s <<< FAILURE! - in CucumberTest
+Get cases worldwide  Time elapsed: 4.831 s  <<< ERROR!
+java.lang.NullPointerException
+
+Get invalid country  Time elapsed: 1.04 s  <<< ERROR!
+java.lang.NullPointerException
+
+Get invalid date range  Time elapsed: 1.291 s  <<< ERROR!
+java.lang.NullPointerException
+
+Example #1  Time elapsed: 0.97 s  <<< ERROR!
+java.lang.NullPointerException
+
