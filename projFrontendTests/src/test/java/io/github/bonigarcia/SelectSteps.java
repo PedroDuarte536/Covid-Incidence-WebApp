@@ -17,12 +17,12 @@ public class SelectSteps {
 
   @When("I navigate to {string}")
   public void iNavigateTo(String url) {
-    driver = WebDriverManager.chromedriver().create();
+    driver = WebDriverManager.firefoxdriver().create();
     driver.get(url);
   }
 
   @And("I select no filters")
-  public void iSelectNoFilters(String from, String to) {
+  public void iSelectNoFilters() {
     indexPage.cleanFilters();
     indexPage.submit();
   }
