@@ -44,7 +44,12 @@ The architecture for the data gathering will be the following:
 
 
 With this decisions made, the next steps will be creating basic skeletons of each class, creating the tests, and iterating through each with a “red-green-refactor” mindset.
+  
+<br>
 
+## Frontend Planning
+
+Given the simplicity of the API, the frontend only needs to have a simple page, giving access to the filters country, date, start_date and end_date and a button to submit it so as to see the desired result.
 
 
 
